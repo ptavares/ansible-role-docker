@@ -6,7 +6,7 @@
   when: docker_compose_version is not defined
 
 - set_fact:
-    docker_compose_version: {{ last_compose_version }}
+    docker_compose_version: "{{ last_compose_version }}"
   when: docker_compose_version is not defined
 
 - name: Check current docker-compose version.
