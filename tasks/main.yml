@@ -20,4 +20,4 @@
 
 # Install docker compose
 - include: install-docker-compose.yml
-   when: docker_compose_install is defined and docker_compose_install
+  when: docker_compose_install is defined and docker_compose_install
