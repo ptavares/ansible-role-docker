@@ -12,6 +12,7 @@
   shell: "curl -sSL {{ docker_apt_key_url }} | sudo apt-key add -"
   args:
     warn: no
+  become: true
   when: add_docker_apt_key is failed
 
 - name: Add Docker repository
