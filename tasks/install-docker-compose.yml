@@ -1,12 +1,14 @@
 - name: Get last docker-compose version
   shell: "curl https://api.github.com/repos/docker/compose/releases | grep browser_download_url | head -n 4 | grep Linux | head -n 1 | cut -d '\"' -f 4 | cut -d '/' -f 8"
+  args:
+    warn: False
   failed_when: False
   changed_when: False
   register: last_compose_version
   when: docker_compose_version is not defined
 
 - set_fact:
-    docker_compose_version: "{{ last_compose_version }}"
+    docker_compose_version: "{{ last_compose_version.stdout }}"
   when: docker_compose_version is not defined
 
 - name: Check current docker-compose version.
@@ -19,6 +21,7 @@
   file:
     path: "{{ docker_compose_path }}"
     state: absent
+  become: true
   when: >
     docker_compose_current_version.stdout is defined
     and last_compose_version.stdout not in docker_compose_current_version.stdout
@@ -29,4 +32,4 @@
     dest: "{{ docker_compose_path }}"
     mode: u+x,g+x,o+x
   become: true
-  when: docker_compose_version is defined
+  when: docker_compose_version is defined and docker_compose_version not in docker_compose_current_version.stdout
