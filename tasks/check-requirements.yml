@@ -1,0 +1,18 @@
+##################################
+# Check requirements before insall
+##################################
+- name: Ensure dependancies presence's
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+    state: present
+
+- name: Remove old Docker versions
+  package:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+    - docker
+    - docker-engine

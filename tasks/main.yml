@@ -1,0 +1,23 @@
+---
+# tasks file for ansible-role-docker
+
+# Check requirement before installation
+- include: check-requirements.yml
+# Only Debian/Ubuntu supported for now
+- include_tasks: setup.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+# Install Docker
+- include_tasks: install.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+# Add users to docker group
+# Add current user if docker_users is not defined
+- set_fact:
+    docker_users: [ "{{ ansible_user }}" ]
+  when: docker_users is not defined
+
+- include: docker-users.yml
+
+# Install docker compose
+- include_tasks: install-docker-compose.yml
+  when: docker_compose_install is defined and docker_compose_install == 'true'
