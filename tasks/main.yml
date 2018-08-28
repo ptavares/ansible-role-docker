@@ -3,21 +3,39 @@
 
 # Check requirement before installation
 - include: check-requirements.yml
+  tags:
+    - docker-install-all
+    - docker-install-requirements
 # Only Debian/Ubuntu supported for now
 - include: setup.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  tags:
+    - docker-install-all
+    - docker-install-setup
 # Install Docker
 - include: install.yml
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  tags:
+    - docker-install-all
+    - docker-install-package
 
 # Add users to docker group
 # Add current user if docker_users is not defined
 - set_fact:
     docker_users: [ "{{ ansible_user }}" ]
   when: docker_users is not defined
+  tags:
+    - docker-install-all
+    - docker-install-users
 
 - include: docker-users.yml
+  tags:
+    - docker-install-all
+    - docker-install-users
 
 # Install docker compose
 - include: install-docker-compose.yml
   when: docker_compose_install is defined and docker_compose_install
+  tags:
+    - docker-install-all
+    - docker-install-compose
