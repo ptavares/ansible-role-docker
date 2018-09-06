@@ -1,7 +1,7 @@
 galaxy_info:
   author: Patrick Tavares
   description: Ansible role for installating docker and docker-compose
-  company: Personal
+  company: ptavares
   license: MIT
   min_ansible_version: 2.5
   platforms:
