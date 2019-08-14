@@ -1,23 +1,15 @@
+---
 ######################################
-# Setup docker APT repository
+# Setup docker APT or YUM repository
 ######################################
-- name: Add Docker apt key
-  apt_key:
-    url: "{{ docker_apt_key_url }}"
-    state: present
-  ignore_errors: true
-  register: add_docker_apt_key
+- include: setup-apt.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  tags:
+    - docker-install-all
+    - docker-install-setup
 
-- name: Add Docker apt key (alternative)
-  shell: "curl -sSL {{ docker_apt_key_url }} | sudo apt-key add -"
-  args:
-    warn: no
-  become: true
-  when: add_docker_apt_key is failed
-
-- name: Add Docker repository
-  apt_repository:
-    repo: "{{ docker_apt_repository_url }}"
-    state: present
-    update_cache: yes
-  become: true
+- include: setup-yum.yml
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+  tags:
+    - docker-install-all
+    - docker-install-setup

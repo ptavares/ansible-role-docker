@@ -1,18 +1,26 @@
 ##################################
 # Check requirements before insall
 ##################################
-- name: Ensure dependancies presence's
-  apt:
-    name:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-    state: present
+- name: Set Common Required Package
+  set_fact: packages="['bash','curl','ca-certificates']"
 
-- name: Remove old Docker versions
-  package:
-    name: '{{ item }}'
-    state: absent
-  with_items:
-    - docker
-    - docker-engine
+- name: Set Ubuntu/Debian Package
+  set_fact: apt_packages="['apt-transport-https','ca-certificates']"
+
+- name: Ensure common dependancies presence's (Debian / Ubuntu)
+  apt:
+    name: "{{ packages }}"
+    state: present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Ensure specific dependancies presence's (Debian / Ubuntu)
+  apt:
+    name: "{{ apt_packages }}"
+    state: present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Ensure common dependancies presence's (CentOS / RedHat)
+  yum:
+    name: "{{ packages }}"
+    state: present
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'

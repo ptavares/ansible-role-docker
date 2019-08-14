@@ -6,15 +6,13 @@
   tags:
     - docker-install-all
     - docker-install-requirements
-# Only Debian/Ubuntu supported for now
+# Setup apt/yum repository
 - include: setup.yml
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   tags:
     - docker-install-all
     - docker-install-setup
-# Install Docker
+# Install / Remove Docker
 - include: install.yml
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   tags:
     - docker-install-all
     - docker-install-package
@@ -35,7 +33,7 @@
 
 # Install docker compose
 - include: install-docker-compose.yml
-  when: docker_compose_install is defined and docker_compose_install
+  when: docker_compose_install is defined
   tags:
     - docker-install-all
     - docker-install-compose

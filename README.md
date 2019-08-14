@@ -1,5 +1,7 @@
 [![Build Status](https://img.shields.io/travis/ptavares/ansible-role-docker/master.svg?style=flat-square)](https://travis-ci.org/ptavares/ansible-role-docker)
 [![Ansible Role](https://img.shields.io/ansible/role/27782.svg)](https://galaxy.ansible.com/ptavares/ansible-role-docker)
+[![Ansible Role](https://img.shields.io/ansible/quality/27782.svg)](https://galaxy.ansible.com/ptavares/ansible-role-docker)
+[![Ansible Role](https://img.shields.io/ansible/role/d/27782.svg)](https://galaxy.ansible.com/ptavares/ansible-role-docker)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/ptavares/ansible-role-docker/blob/master/LICENSE)
 
 ansible-role-docker
@@ -19,6 +21,13 @@ Available variables are listed below, along with default values (see [defaults/m
 ### Docker options
 
 ```yaml
+# Wanted Docker Edition - can be one of: 'ce' (Community Edition) or 'ee' (Enterprise Edition).
+docker_edition: 'ce'
+docker_package: "docker-{{ docker_edition }}"
+
+# Install or remove docker_package : 'present' for install - 'absent' to uninstall
+docker_package_state: present
+
 # A list of users who will be added to the docker group (current user by default).
 docker_users: []
 ```
@@ -39,10 +48,11 @@ docker_restart_handler_state: restarted
 ### Docker Compose options
 
 ```yaml
-
+# Weather of not to install docker-compose
+# Set to false if it's already installed and wanted to remove it
 docker_compose_install: true
-# Default to last version, else uncomment below var and set version
-# docker_compose_version: 1.22.0 
+# Default to last version
+# docker_compose_version: X.X.X
 # Default path for docker-compose
 docker_compose_path: /usr/local/bin/docker-compose
 ```
@@ -62,6 +72,17 @@ docker_apt_key_url: https://download.docker.com/linux/{{ ansible_distribution|lo
 # Docker apt repository url for amd64 arch
 docker_apt_repository_url: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}"
 ```
+
+### Yum options
+
+**Advanced user**
+
+```yaml
+# Url for gpg key
+docker_gpg_key_url: https://download.docker.com/linux/centos/gpg
+# Docker yum repository url for Fedora/CentOS/RHEL
+docker_yum_repo_url: https://download.docker.com/linux/{{ (ansible_distribution == "Fedora") | ternary("fedora","centos") }}/docker-{{ docker_edition }}.repo
+``` 
 
 Dependencies
 ------------
