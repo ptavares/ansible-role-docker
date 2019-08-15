@@ -1,7 +1,7 @@
 [![Build Status](https://img.shields.io/travis/ptavares/ansible-role-docker/master.svg?style=flat-square)](https://travis-ci.org/ptavares/ansible-role-docker)
-[![Ansible Role](https://img.shields.io/ansible/role/27782.svg)](https://galaxy.ansible.com/ptavares/ansible-role-docker)
-[![Ansible Role](https://img.shields.io/ansible/quality/27782.svg)](https://galaxy.ansible.com/ptavares/ansible-role-docker)
-[![Ansible Role](https://img.shields.io/ansible/role/d/27782.svg)](https://galaxy.ansible.com/ptavares/ansible-role-docker)
+[![Ansible Role](https://img.shields.io/ansible/role/29169.svg)](https://galaxy.ansible.com/ptavares/ansible-role-docker)
+[![Ansible Role](https://img.shields.io/ansible/quality/29169.svg)](https://galaxy.ansible.com/ptavares/ansible-role-docker)
+[![Ansible Role](https://img.shields.io/ansible/role/d/29169.svg)](https://galaxy.ansible.com/ptavares/ansible-role-docker)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/ptavares/ansible-role-docker/blob/master/LICENSE)
 
 ansible-role-docker
