@@ -19,7 +19,8 @@
 
 # Add users to docker group
 # Add current user if docker_users is not defined
-- set_fact:
+- name: Set docker users
+  set_fact:
     docker_users: [ "{{ ansible_user }}" ]
   when: docker_users is not defined
   tags:
