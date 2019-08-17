@@ -7,20 +7,13 @@
 - name: Set Ubuntu/Debian Package
   set_fact: apt_packages="['apt-transport-https','ca-certificates']"
 
-- name: Ensure common dependancies presence's (Debian / Ubuntu)
-  apt:
+- name: Ensure common dependancies presence's
+  package:
     name: "{{ packages }}"
     state: present
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Ensure specific dependancies presence's (Debian / Ubuntu)
   apt:
     name: "{{ apt_packages }}"
     state: present
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
-- name: Ensure common dependancies presence's (CentOS / RedHat)
-  yum:
-    name: "{{ packages }}"
-    state: present
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
