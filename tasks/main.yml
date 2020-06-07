@@ -21,7 +21,7 @@
 # Add current user if docker_users is not defined
 - name: Set docker users
   set_fact:
-    docker_users: [ "{{ ansible_user }}" ]
+    docker_users: ["{{ ansible_user }}"]
   when: docker_users is not defined
   tags:
     - docker-install-all

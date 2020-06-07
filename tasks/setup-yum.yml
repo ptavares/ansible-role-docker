@@ -1,3 +1,4 @@
+---
 ######################################
 # Setup docker YUM repository
 ######################################
@@ -21,7 +22,7 @@
     option: enabled
     value: 0
 
-#- name: Configure Docker Test repo.
+# - name: Configure Docker Test repo.
 #  ini_file:
 #    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
 #    section: 'docker-{{ docker_edition }}-test'

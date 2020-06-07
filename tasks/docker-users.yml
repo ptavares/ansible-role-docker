@@ -1,6 +1,7 @@
+---
 #############################
-# Add user(s) to docker group 
-############################
+# Add user(s) to docker group
+#############################
 - name: "Add user(s) to docker group : {{ docker_users }}"
   user:
     name: "{{ item }}"

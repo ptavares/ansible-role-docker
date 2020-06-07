@@ -4,14 +4,19 @@
 ##############################
 # Docker options
 ##############################
-# Wanted Docker Edition - can be one of: 'ce' (Community Edition) or 'ee' (Enterprise Edition).
+# Wanted Docker Edition - can be one of:
+# - 'ce' (Community Edition)
+# - 'ee' (Enterprise Edition)
 docker_edition: 'ce'
 docker_package: "docker-{{ docker_edition }}"
 
-# Install or remove docker_package : 'present' for install - 'absent' to uninstall
+# Install or remove docker_package :
+# - 'present' for install
+# - 'absent' to uninstall
 docker_package_state: present
 
-# A list of users who will be added to the docker group (current user by default).
+# A list of users who will be added to the docker group.
+# Default, use current user.
 docker_users: []
 
 ##############################

@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Patrick Tavares
   description: Ansible role for installating docker and docker-compose
