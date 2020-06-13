@@ -6,6 +6,7 @@
   rpm_key:
     key: "{{ docker_gpg_key_url }}"
     state: present
+  become: true
 
 - name: Add Docker repository.
   get_url:
@@ -21,6 +22,7 @@
     section: 'docker-{{ docker_edition }}-edge'
     option: enabled
     value: 0
+  become: true
 
 # - name: Configure Docker Test repo.
 #  ini_file:

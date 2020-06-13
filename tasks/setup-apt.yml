@@ -6,13 +6,18 @@
   apt_key:
     url: "{{ docker_apt_key_url }}"
     state: present
+  become: true
   ignore_errors: true
   register: add_docker_apt_key
 
 - name: Add Docker apt key (alternative)
   shell: |
     set -o pipefail
-    curl -sSL {{ docker_apt_key_url }} | sudo apt-key add -
+    SUDO=''
+    if [[ "${EUID}" -ne 0 ]]; then
+        SUDO='sudo'
+    fi
+    curl -sSL "{{ docker_apt_key_url }}" | ${SUDO} apt-key add -
   args:
     executable: /bin/bash
     warn: no
